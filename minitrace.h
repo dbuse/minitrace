@@ -129,6 +129,10 @@ void internal_mtr_raw_event_arg(const char *category, const char *name, char ph,
 #define MTR_END_I(c, n, aname, aintval) internal_mtr_raw_event_arg(c, n, 'E', 0, MTR_ARG_TYPE_INT, aname, (void*)(intptr_t)(aintval))
 #define MTR_SCOPE_I(c, n, aname, aintval) MTRScopedTraceArg ____mtr_scope(c, n, MTR_ARG_TYPE_INT, aname, (void*)(intptr_t)(aintval))
 
+// Async events with named arguments
+#define MTR_START_I(c, n, id, aname, aintval) internal_mtr_raw_event_arg(c, n, 'S', (void *)(id), MTR_ARG_TYPE_INT, aname, (void*)(intptr_t)(aintval))
+#define MTR_FINISH_I(c, n, id, aname, aintval) internal_mtr_raw_event_arg(c, n, 'F', (void *)(id), MTR_ARG_TYPE_INT, aname, (void*)(intptr_t)(aintval))
+
 // Instant events. For things with no duration.
 #define MTR_INSTANT(c, n) internal_mtr_raw_event(c, n, 'I', 0)
 #define MTR_INSTANT_C(c, n, aname, astrval) internal_mtr_raw_event_arg(c, n, 'I', 0, MTR_ARG_TYPE_STRING_CONST, aname, (void *)(astrval))
